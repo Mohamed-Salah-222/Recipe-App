@@ -1,14 +1,14 @@
-// src/components/EditRecipePage.jsx
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function EditRecipePage() {
-  const { id } = useParams(); // Get the recipe ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const { token } = useAuth();
 
-  // State for all the form fields
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [cookingTime, setCookingTime] = useState("");
@@ -19,7 +19,7 @@ function EditRecipePage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // This useEffect runs ONCE when the component loads to fetch the recipe data
+  
   useEffect(() => {
     const fetchRecipeForEdit = async () => {
       try {
@@ -29,12 +29,11 @@ function EditRecipePage() {
         }
         const data = await response.json();
 
-        // --- THIS IS THE KEY PART ---
-        // We populate our form's state with the data from the database
+       
         setName(data.name);
         setDescription(data.description);
         setCookingTime(data.cookingTime);
-        // We use .join('\n') to turn the arrays back into a single string for the textarea
+        
         setIngredients(data.ingredients.join("\n"));
         setInstructions(data.instructions.join("\n"));
       } catch (err) {
@@ -46,21 +45,20 @@ function EditRecipePage() {
     };
 
     fetchRecipeForEdit();
-  }, [id]); // Dependency array ensures it re-fetches if the ID changes
+  }, [id]); 
 
-  // This function handles the form submission to UPDATE the recipe
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
-    // We don't handle image re-uploads in this version for simplicity,
-    // so we send the data as JSON.
+   
     const updatedRecipeData = {
       name,
       description,
       cookingTime,
-      ingredients: ingredients.split("\n"), // Split strings back into arrays
+      ingredients: ingredients.split("\n"), 
       instructions: instructions.split("\n"),
     };
 
@@ -79,7 +77,7 @@ function EditRecipePage() {
         throw new Error(errorData.message || "Failed to update recipe.");
       }
 
-      // If update is successful, navigate back to the recipe's detail page
+      
       navigate(`/recipes/${id}`);
     } catch (err) {
       console.error("Error updating recipe:", err);
@@ -91,18 +89,18 @@ function EditRecipePage() {
 
   if (loading) return <div className="text-center p-10">Loading recipe for editing...</div>;
 
-  // The JSX is the same form as our Create page, but the values are pre-filled
+  
   return (
     <div className="bg-stone-50 py-10 px-4">
       <div className="max-w-3xl mx-auto p-8 space-y-6 bg-white rounded-xl shadow-lg">
         <h1 className="text-3xl font-bold text-center text-gray-800">
-          {/* This title will be different for Edit vs. Create */}
+          
           Share Your Recipe
         </h1>
         <p className="text-center text-gray-500">Fill out the details below to add your recipe to the platform.</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* --- Form Fields --- */}
+          
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Recipe Name
@@ -140,7 +138,7 @@ function EditRecipePage() {
             <textarea id="instructions" value={instructions} onChange={(e) => setInstructions(e.target.value)} rows="8" required className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
           </div>
 
-          {/* Image Upload - Note: Edit page doesn't handle re-uploads in our current version */}
+          
           <div>
             <label htmlFor="recipeImage" className="block text-sm font-medium text-gray-700">
               Recipe Image
@@ -152,7 +150,7 @@ function EditRecipePage() {
 
           <div>
             <button type="submit" disabled={loading} className="w-full px-4 py-3 font-semibold text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-300 disabled:bg-emerald-300">
-              {/* This text will be different for Edit vs. Create */}
+             
               {loading ? "Submitting..." : "Submit Recipe"}
             </button>
           </div>

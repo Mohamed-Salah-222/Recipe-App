@@ -216,21 +216,16 @@ app.get("/api/recipes/:id/reviews", async (req, res) => {
 //& Get a single user
 app.get("/api/users/:username/recipes", async (req, res) => {
   try {
-    // 1. Get the username from the URL parameters
     const username = req.params.username;
 
-    // 2. Find the user in the User collection by their username
     const user = await User.findOne({ username: username });
 
-    // 3. Check if the user exists
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
 
-    // 4. Find all recipes where the 'author' field matches the user's ID
-    const recipes = await Recipe.find({ author: user._id }).sort({ createdAt: -1 }).populate("author", "username"); // We can still populate to be consistent
+    const recipes = await Recipe.find({ author: user._id }).sort({ createdAt: -1 }).populate("author", "username");
 
-    // 5. Send the found recipes back
     res.status(200).json(recipes);
   } catch (error) {
     console.error("Error fetching user's recipes:", error);

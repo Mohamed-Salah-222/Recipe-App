@@ -20,13 +20,10 @@ function App() {
   };
 
   return (
-    // Use a slightly warmer background for the whole page
     <div className="bg-stone-50 min-h-screen font-sans">
-      {/* --- Polished Navigation Bar --- */}
       <nav className="bg-white shadow-md sticky top-0 z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left Side: Logo and Main Links */}
             <div className="flex items-center space-x-8">
               <Link to="/" className="text-2xl font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
                 RecipeShare
@@ -43,7 +40,6 @@ function App() {
               </div>
             </div>
 
-            {/* Right Side: User Auth Links */}
             <div className="hidden md:flex items-center space-x-4">
               {user ? (
                 <>
@@ -65,16 +61,12 @@ function App() {
                 </>
               )}
             </div>
-
-            {/* Mobile Menu Button would go here in a real app */}
           </div>
         </div>
       </nav>
 
-      {/* Main content area */}
       <main className="container mx-auto p-4 md:p-8">
         <Routes>
-          {/* Your routes remain the same */}
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />

@@ -63,13 +63,13 @@ function CreateRecipePage() {
     <div className="bg-stone-50 py-10 px-4">
       <div className="max-w-3xl mx-auto p-8 space-y-6 bg-white rounded-xl shadow-lg">
         <h1 className="text-3xl font-bold text-center text-gray-800">
-          {/* This title will be different for Edit vs. Create */}
+          
           Share Your Recipe
         </h1>
         <p className="text-center text-gray-500">Fill out the details below to add your recipe to the platform.</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* --- Form Fields --- */}
+          
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Recipe Name
@@ -107,7 +107,7 @@ function CreateRecipePage() {
             <textarea id="instructions" value={instructions} onChange={(e) => setInstructions(e.target.value)} rows="8" required className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
           </div>
 
-          {/* Image Upload - Note: Edit page doesn't handle re-uploads in our current version */}
+          
           <div>
             <label htmlFor="recipeImage" className="block text-sm font-medium text-gray-700">
               Recipe Image
@@ -125,7 +125,7 @@ function CreateRecipePage() {
 
           <div>
             <button type="submit" disabled={loading} className="w-full px-4 py-3 font-semibold text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-300 disabled:bg-emerald-300">
-              {/* This text will be different for Edit vs. Create */}
+            
               {loading ? "Submitting..." : "Submit Recipe"}
             </button>
           </div>

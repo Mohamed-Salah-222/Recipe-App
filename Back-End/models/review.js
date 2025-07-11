@@ -28,29 +28,26 @@ const reviewSchema = new Schema(
 );
 
 reviewSchema.statics.calculateAverageRating = async function (recipeId) {
-  // 'this' refers to the Review model
   const stats = await this.aggregate([
     {
-      $match: { recipe: recipeId }, // Find all reviews for the given recipeId
+      $match: { recipe: recipeId },
     },
     {
       $group: {
         _id: "$recipe",
-        numReviews: { $sum: 1 }, // Count the number of reviews
-        averageRating: { $avg: "$rating" }, // Calculate the average of the 'rating' field
+        numReviews: { $sum: 1 },
+        averageRating: { $avg: "$rating" },
       },
     },
   ]);
 
   try {
     if (stats.length > 0) {
-      // If there are reviews, update the corresponding recipe document
       await mongoose.model("Recipe").findByIdAndUpdate(recipeId, {
         numReviews: stats[0].numReviews,
         averageRating: stats[0].averageRating,
       });
     } else {
-      // If there are no reviews left, reset the recipe's rating stats
       await mongoose.model("Recipe").findByIdAndUpdate(recipeId, {
         numReviews: 0,
         averageRating: 0,
@@ -61,10 +58,7 @@ reviewSchema.statics.calculateAverageRating = async function (recipeId) {
   }
 };
 
-// --- IMPORTANT: Call the calculation method after saving a review ---
 reviewSchema.post("save", function () {
-  // 'this.constructor' refers to the model (Review)
-  // 'this.recipe' is the ID of the recipe this review belongs to
   this.constructor.calculateAverageRating(this.recipe);
 });
 

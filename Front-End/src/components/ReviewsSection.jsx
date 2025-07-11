@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import AddReviewForm from "./AddReviewForm"; // Import the new form component
+import AddReviewForm from "./AddReviewForm"; 
 
 function ReviewsSection({ recipeId }) {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth(); // Get the current user to see if they are logged in
+  const { user } = useAuth(); 
 
-  // --- CORRECTED useEffect ---
+
   useEffect(() => {
-    // We move the fetchReviews function declaration INSIDE the useEffect hook.
+    
     const fetchReviews = async () => {
       try {
-        // We don't set loading to true here to avoid flashing on refresh
+        
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${recipeId}/reviews`);
         if (!response.ok) throw new Error("Failed to fetch reviews.");
         const data = await response.json();
@@ -27,13 +27,11 @@ function ReviewsSection({ recipeId }) {
     if (recipeId) {
       fetchReviews();
     }
-  }, [recipeId]); // The dependency array is now correct because fetchReviews is not an external dependency.
+  }, [recipeId]); 
 
-  // This is the function that will be passed to the AddReviewForm
-  // so it can trigger a refresh after a new review is posted.
+  
   const handleReviewPosted = () => {
-    // To refresh the list, we simply call fetchReviews again.
-    // We need to redefine it here or lift the state up. For simplicity, we'll re-fetch.
+   
     const refetch = async () => {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${recipeId}/reviews`);
       const data = await response.json();
@@ -48,7 +46,7 @@ function ReviewsSection({ recipeId }) {
     <div className="mt-12">
       <h2 className="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-2 mb-6 ">Reviews</h2>
 
-      {/* We now pass the handleReviewPosted function as a prop */}
+    
       {user && <AddReviewForm recipeId={recipeId} onReviewPosted={handleReviewPosted} />}
 
       <div className="mt-8 space-y-6">

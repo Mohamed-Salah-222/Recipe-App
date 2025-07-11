@@ -1,4 +1,3 @@
-// src/components/AddReviewForm.jsx
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
@@ -38,7 +37,7 @@ function AddReviewForm({ recipeId, onReviewPosted }) {
         <h3 className="text-xl font-semibold text-gray-800">Leave a Review</h3>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Your Rating</label>
-          {/* Star Rating Input */}
+
           <div className="flex items-center text-3xl">
             {[1, 2, 3, 4, 5].map((star) => (
               <span key={star} onClick={() => setRating(star)} className={`cursor-pointer transition-colors ${star <= rating ? "text-yellow-400" : "text-gray-300 hover:text-yellow-300"}`}>

@@ -1,10 +1,10 @@
-// src/components/UserProfilePage.jsx
+
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import RecipeCard from "./RecipeCard"; // We can reuse our RecipeCard component!
+import RecipeCard from "./RecipeCard"; 
 
 function UserProfilePage() {
-  const { username } = useParams(); // Get the username from the URL parameter
+  const { username } = useParams(); 
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +26,7 @@ function UserProfilePage() {
     };
 
     fetchUserRecipes();
-  }, [username]); // Re-fetch if we navigate to a different user's profile
+  }, [username]); 
 
   if (loading) {
     return <div className="text-center p-10">Loading profile...</div>;

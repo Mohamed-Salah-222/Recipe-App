@@ -1,9 +1,9 @@
-// frontend/src/components/RecipeCard.jsx (Corrected and Simplified)
+
 import { Link } from "react-router-dom";
 
-// This component's only job is to receive a 'recipe' object and display it.
+
 function RecipeCard({ recipe }) {
-  // A safety check in case the author data is not populated correctly
+
   const authorUsername = recipe.author ? recipe.author.username : "Unknown";
 
   return (

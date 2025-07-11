@@ -62,7 +62,7 @@ function RecipeDetailPage() {
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <img src={recipe.imageUrl || "https://placehold.co/1200x600?text=Recipe+Image"} alt={recipe.name} className="w-full h-64 md:h-96 object-cover" />
         <div className="p-6 md:p-8">
-          {/* --- Header Section --- */}
+        
           <div className="flex flex-col sm:flex-row justify-between sm:items-start mb-4">
             <div className="mb-4 sm:mb-0">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{recipe.name}</h1>
@@ -86,12 +86,12 @@ function RecipeDetailPage() {
             <span className="mr-6">
               Cooking Time: <strong>{recipe.cookingTime} minutes</strong>
             </span>
-            {/* We could add more stats here like difficulty or servings */}
+            
           </div>
 
           <p className="text-gray-700 text-lg mb-8">{recipe.description}</p>
 
-          {/* --- Main Content: Ingredients & Instructions --- */}
+         
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-1">
               <h2 className="text-2xl font-semibold text-gray-800 border-b-2 border-emerald-500 pb-2 mb-4">Ingredients</h2>
@@ -111,7 +111,7 @@ function RecipeDetailPage() {
             </div>
           </div>
 
-          {/* --- Author's Edit/Delete Buttons --- */}
+         
           {isAuthor && (
             <div className="mt-8 pt-6 border-t flex justify-end space-x-4">
               <Link to={`/recipes/${recipe._id}/edit`} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition-colors">
@@ -124,7 +124,7 @@ function RecipeDetailPage() {
           )}
         </div>
 
-        {/* --- Reviews Section --- */}
+        
         <div className="mt-12">
           <ReviewsSection recipeId={id} />
         </div>
