@@ -1,0 +1,15 @@
+# Dependencies in any subfolder
+node_modules/
+/backend/node_modules/
+/frontend/node_modules/
+
+# Build output from the frontend
+/frontend/dist/
+
+# Environment files (NEVER commit these)
+.env
+/backend/.env
+/frontend/.env*
+
+# OS-specific files
+.DS_Store
