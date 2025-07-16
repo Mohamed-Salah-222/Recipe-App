@@ -58,6 +58,7 @@ node app.js
 
 ### 2. Frontend Setup
 
+```bash
 # Navigate to the frontend directory
 
 cd frontend
@@ -69,3 +70,4 @@ npm install
 # Start the client
 
 npm start
+```
