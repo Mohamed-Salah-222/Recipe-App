@@ -16,6 +16,7 @@ const Review = require("./models/review");
 const Recipe = require("./models/recipe");
 const path = require("path");
 const passport = require("passport");
+const { sendVerificationEmail, sendPasswordResetEmail } = require("./services/emailServices");
 
 //!  MiddleWare + App + DataBase
 

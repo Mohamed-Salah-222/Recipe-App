@@ -33,15 +33,15 @@ function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 -m-4 md:-m-8 relative overflow-hidden" style={{ minHeight: "calc(100vh - 120px)" }}>
+    <div className="flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50 -m-4 md:-m-8 relative overflow-hidden" style={{ minHeight: "calc(100vh - 120px)" }}>
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-emerald-400/20 to-green-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <div className="w-full max-w-md bg-white/80 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-8 space-y-6 relative z-10 hover:shadow-3xl transition-all duration-300">
         <div className="text-center space-y-2">
-          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg">
+          <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg">
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
@@ -55,8 +55,8 @@ function RegisterPage() {
               Username
             </label>
             <div className="relative overflow-hidden rounded-xl">
-              <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="e.g., mohamed_dev" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/80 group-hover:border-gray-300" />
-              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transform scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="e.g., mohamed_dev" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500 transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/80 group-hover:border-gray-300" />
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-600 transform scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
             </div>
           </div>
 
@@ -65,8 +65,8 @@ function RegisterPage() {
               Email Address
             </label>
             <div className="relative overflow-hidden rounded-xl">
-              <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/80 group-hover:border-gray-300" />
-              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transform scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500 transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/80 group-hover:border-gray-300" />
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-600 transform scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
             </div>
           </div>
 
@@ -76,8 +76,8 @@ function RegisterPage() {
               <span className="text-xs text-gray-500 ml-2 font-normal">(min. 8 characters)</span>
             </label>
             <div className="relative overflow-hidden rounded-xl">
-              <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/80 group-hover:border-gray-300" />
-              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transform scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500 transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/80 group-hover:border-gray-300" />
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-600 transform scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
             </div>
           </div>
 
@@ -95,7 +95,7 @@ function RegisterPage() {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
+            className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
           >
             <span className="flex items-center justify-center">
               {loading ? (
@@ -115,8 +115,8 @@ function RegisterPage() {
 
         <div className="text-center">
           <p className="text-sm text-gray-600">
-            Already have an account?
-            <Link to="/login" className="font-semibold text-blue-600 hover:text-blue-700 transition-colors duration-200 hover:underline cursor-pointer">
+            Already have an account?{" "}
+            <Link to="/login" className="font-semibold text-green-600 hover:text-green-700 transition-colors duration-200 hover:underline cursor-pointer">
               Log In
             </Link>
           </p>

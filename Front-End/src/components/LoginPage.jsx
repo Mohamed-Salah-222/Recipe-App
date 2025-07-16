@@ -37,18 +37,18 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 -m-4 md:-m-8 relative overflow-hidden" style={{ minHeight: "calc(100vh - 120px)" }}>
+    <div className="flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50 -m-4 md:-m-8 relative overflow-hidden" style={{ minHeight: "calc(100vh - 120px)" }}>
       {/* Background Blobs */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-emerald-400/20 to-green-400/20 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       {/* Login Card */}
       <div className="w-full max-w-md bg-white/90 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-10 space-y-6 relative z-10 transition-shadow hover:shadow-3xl duration-300">
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mx-auto flex items-center justify-center shadow-lg">
+          <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mx-auto flex items-center justify-center shadow-lg">
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
             </svg>
@@ -92,8 +92,8 @@ function LoginPage() {
               Email Address
             </label>
             <div className="relative overflow-hidden rounded-xl">
-              <input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/60 focus:outline-none transition-all duration-200 hover:bg-white/80" />
-              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 scale-x-0 group-focus-within:scale-x-100 transform transition-transform duration-300" />
+              <input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-green-500/60 focus:outline-none transition-all duration-200 hover:bg-white/80" />
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-600 scale-x-0 group-focus-within:scale-x-100 transform transition-transform duration-300" />
             </div>
           </div>
 
@@ -103,11 +103,11 @@ function LoginPage() {
               Password
             </label>
             <div className="relative overflow-hidden rounded-xl">
-              <input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/60 focus:outline-none transition-all duration-200 hover:bg-white/80" />
-              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 scale-x-0 group-focus-within:scale-x-100 transform transition-transform duration-300" />
+              <input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-green-500/60 focus:outline-none transition-all duration-200 hover:bg-white/80" />
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-600 scale-x-0 group-focus-within:scale-x-100 transform transition-transform duration-300" />
             </div>
             <div className="text-right mt-2">
-              <Link to="/forgot-password" className="text-xs font-medium text-blue-600 hover:underline">
+              <Link to="/forgot-password" className="text-xs font-medium text-green-600 hover:underline">
                 Forgot Password?
               </Link>
             </div>
@@ -126,7 +126,7 @@ function LoginPage() {
           )}
 
           {/* Submit Button */}
-          <button type="submit" disabled={loading} className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+          <button type="submit" disabled={loading} className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
             <span className="flex items-center justify-center">
               {loading ? (
                 <>
@@ -146,7 +146,7 @@ function LoginPage() {
         {/* Footer */}
         <p className="text-sm text-center text-gray-600">
           Need an account?{" "}
-          <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-700 transition-colors duration-200 hover:underline">
+          <Link to="/register" className="font-semibold text-green-600 hover:text-green-700 transition-colors duration-200 hover:underline">
             Sign Up
           </Link>
         </p>

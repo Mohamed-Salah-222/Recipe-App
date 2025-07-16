@@ -12,6 +12,7 @@ import UserProfilePage from "./components/UserProfilePage";
 import ForgotPasswordPage from "./components/ForgotPasswordPage";
 import ResetPasswordPage from "./components/ResetPasswordPage";
 import GoogleAuthCallbackPage from "./components/GoogleAuthCallbackPage";
+import VerifyPage from "./components/VerifyPage";
 
 function App() {
   const { user, logout } = useAuth();
@@ -73,6 +74,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/verify-email" element={<VerifyPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password/:userId/:token" element={<ResetPasswordPage />} />
           <Route path="/auth/google/callback" element={<GoogleAuthCallbackPage />} />
