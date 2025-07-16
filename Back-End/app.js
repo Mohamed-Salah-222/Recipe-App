@@ -26,6 +26,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(passport.initialize());
 
 const dbURI = process.env.MONGODB_URI;
@@ -228,7 +229,7 @@ app.post("/api/recipes", authMiddleware, upload.single("recipeImage"), async (re
       return res.status(400).json({ message: "Name, ingredients, and instructions are required." });
     }
 
-    const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+    const imageUrl = `/images/${req.file.filename}`;
 
     const ingredientsArray = ingredients.split(",").map((item) => item.trim());
     const instructionsArray = instructions.split(",").map((step) => step.trim());

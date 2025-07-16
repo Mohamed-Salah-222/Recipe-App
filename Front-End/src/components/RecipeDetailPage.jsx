@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ReviewsSection from "./ReviewsSection";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function RecipeDetailPage() {
   const { id } = useParams();
@@ -93,7 +94,7 @@ function RecipeDetailPage() {
       <div className="relative">
         {/* Background Image */}
         <div className="h-96 md:h-[500px] relative overflow-hidden">
-          <img src={recipe.imageUrl || "https://placehold.co/1200x600?text=Recipe+Image"} alt={recipe.name} className="w-full h-full object-cover" />
+          <img src={recipe.imageUrl ? `${BASE_URL}${recipe.imageUrl}` : "https://placehold.co/600x400?text=No+Image"} alt={recipe.name} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
           {/* Back Button */}

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function RecipeCard({ recipe }) {
   const authorUsername = recipe.author ? recipe.author.username : "Unknown";
@@ -7,7 +8,7 @@ function RecipeCard({ recipe }) {
     <Link to={`/recipes/${recipe._id}`} className="group block bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 cursor-pointer border border-gray-100 hover:border-emerald-200">
       {/* Image Container with Overlay Effects */}
       <div className="relative h-56 overflow-hidden">
-        <img src={recipe.imageUrl || "https://placehold.co/600x400?text=No+Image"} alt={recipe.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <img src={recipe.imageUrl ? `${BASE_URL}${recipe.imageUrl}` : "https://placehold.co/600x400?text=No+Image"} alt={recipe.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
