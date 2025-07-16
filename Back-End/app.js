@@ -287,14 +287,24 @@ app.post("/api/recipes/:id/reviews", authMiddleware, async (req, res) => {
 //& ALL Recipes API >> Updated with the search
 app.get("/api/recipes", async (req, res) => {
   try {
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 9;
+    const skip = (page - 1) * limit;
+
     const filter = {};
     if (req.query.search) {
       filter.$or = [{ name: { $regex: req.query.search, $options: "i" } }, { ingredients: { $regex: req.query.search, $options: "i" } }];
     }
 
-    const recipes = await Recipe.find(filter).sort({ createdAt: -1 }).populate("author", "username");
+    const totalRecipes = await Recipe.countDocuments(filter);
 
-    res.status(200).json(recipes);
+    const recipes = await Recipe.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).populate("author", "username");
+
+    res.status(200).json({
+      recipes: recipes,
+      currentPage: page,
+      totalPages: Math.ceil(totalRecipes / limit),
+    });
   } catch (error) {
     console.error("Error fetching recipes:", error);
     res.status(500).json({ message: "Error fetching recipes" });

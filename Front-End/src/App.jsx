@@ -98,6 +98,12 @@ function App() {
           <Route path="/profile/:username" element={<UserProfilePage />} />
         </Routes>
       </main>
+      <footer className="bg-white border-t border-gray-200 mt-auto">
+        <div className="container mx-auto py-6 px-4 text-center text-gray-500">
+          <p>&copy; {new Date().getFullYear()} RecipeShare. All Rights Reserved.</p>
+          <p className="text-sm mt-2">Built with ❤️ by Mohamed Salah</p>
+        </div>
+      </footer>
     </div>
   );
 }
