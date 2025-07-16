@@ -55,3 +55,17 @@ npm install
 # Start the server
 node app.js
 ```
+
+### 2. Frontend Setup
+
+# Navigate to the frontend directory
+
+cd frontend
+
+# Install dependencies
+
+npm install
+
+# Start the client
+
+npm start
