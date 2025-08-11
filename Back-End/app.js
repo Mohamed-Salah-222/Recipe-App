@@ -19,7 +19,6 @@ const passport = require("passport");
 const { sendVerificationEmail, sendPasswordResetEmail } = require("./services/emailServices");
 
 //!  MiddleWare + App + DataBase
-
 const app = express();
 const port = process.env.PORT || 3000;
 
