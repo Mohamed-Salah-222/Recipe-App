@@ -423,16 +423,16 @@ app.get(
     session: false,
   })
 );
-app.get("/auth/google/callback", passport.authenticate("google", { session: false, failureRedirect: "/login" }), (req, res) => {
+app.get("/api/auth/google/callback", passport.authenticate("google", { session: false, failureRedirect: "/login" }), (req, res) => {
   const payload = {
     userId: req.user._id,
     email: req.user.email,
     username: req.user.username,
   };
+
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-  // Fixed: Use environment variable instead of hardcoded URL
-  res.redirect(`${process.env.FRONTEND_URL}/auth/google/callback?token=${token}`);
+  res.redirect(`https://recipe-app-blush-three.vercel.app/auth/google/callback?token=${token}`);
 });
 //! DataBase
 mongoose
