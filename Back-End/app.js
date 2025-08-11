@@ -434,7 +434,6 @@ app.get("/auth/google/callback", passport.authenticate("google", { session: fals
   // Fixed: Use environment variable instead of hardcoded URL
   res.redirect(`${process.env.FRONTEND_URL}/auth/google/callback?token=${token}`);
 });
-
 //! DataBase
 mongoose
   .connect(dbURI)
