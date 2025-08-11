@@ -429,7 +429,6 @@ app.get("/api/auth/google/callback", passport.authenticate("google", { session: 
     email: req.user.email,
     username: req.user.username,
   };
-
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 
   res.redirect(`https://recipe-app-blush-three.vercel.app/auth/google/callback?token=${token}`);
