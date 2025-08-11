@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../context/AuthContext";
 import RecipeCard from "./RecipeCard";
 
 function UserProfilePage() {
@@ -59,6 +59,15 @@ function UserProfilePage() {
       setFavoritesLoading(false);
     }
   };
+
+  // Fetch favorites immediately when component mounts if it's the user's own profile
+  useEffect(() => {
+    if (isOwnProfile && token) {
+      fetchFavorites();
+    }
+  }, [isOwnProfile, token]);
+
+  // Keep the existing useEffect for lazy loading when tab is clicked (as backup)
   useEffect(() => {
     if (activeTab === "favorites" && isOwnProfile && favoriteRecipes.length === 0) {
       fetchFavorites();
@@ -79,7 +88,6 @@ function UserProfilePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
       <div className="max-w-6xl mx-auto px-6 py-8">
-    
         <div className="bg-white rounded-3xl shadow-lg p-8 mb-8">
           <div className="flex items-center gap-6 mb-6">
             <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center">
@@ -95,7 +103,6 @@ function UserProfilePage() {
             </div>
           </div>
 
-      
           <div className="flex gap-4 border-b border-gray-200">
             <button onClick={() => setActiveTab("created")} className={`pb-4 px-2 font-semibold transition-colors relative ${activeTab === "created" ? "text-emerald-600 border-b-2 border-emerald-600" : "text-gray-600 hover:text-emerald-600"}`}>
               <div className="flex items-center gap-2">
@@ -106,23 +113,20 @@ function UserProfilePage() {
               </div>
             </button>
 
-     
             {isOwnProfile && (
               <button onClick={() => setActiveTab("favorites")} className={`pb-4 px-2 font-semibold transition-colors relative ${activeTab === "favorites" ? "text-red-600 border-b-2 border-red-600" : "text-gray-600 hover:text-red-600"}`}>
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
-                  Favorite Recipes ({favoriteRecipes.length})
+                  Favorite Recipes ({favoritesLoading ? "..." : favoriteRecipes.length})
                 </div>
               </button>
             )}
           </div>
         </div>
 
-
         <div className="bg-white rounded-3xl shadow-lg p-8">
-
           {activeTab === "created" && (
             <div>
               <div className="flex items-center gap-3 mb-6">
@@ -153,7 +157,6 @@ function UserProfilePage() {
               )}
             </div>
           )}
-
 
           {activeTab === "favorites" && isOwnProfile && (
             <div>
