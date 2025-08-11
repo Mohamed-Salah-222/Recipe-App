@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ReviewsSection from "./ReviewsSection";
-const BASE_URL = import.meta.env.VITE_API_URL;
 
 function RecipeDetailPage() {
   const { id } = useParams();
@@ -30,6 +29,7 @@ function RecipeDetailPage() {
     };
     fetchRecipe();
   }, [id]);
+
   useEffect(() => {
     if (user && user.favorites && id) {
       setIsFavorited(user.favorites.includes(id));
@@ -44,7 +44,7 @@ function RecipeDetailPage() {
 
     setIsLoading(true);
     try {
-      const url = `${BASE_URL}/api/favorites/${id}`;
+      const url = `${import.meta.env.VITE_API_URL}/api/favorites/${id}`; // ✅ Changed from BASE_URL
       const method = isFavorited ? "DELETE" : "POST";
 
       const response = await fetch(url, {
@@ -158,14 +158,11 @@ function RecipeDetailPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-
       <div className="relative">
-    
         <div className="h-96 md:h-[500px] relative overflow-hidden">
           <img src={recipe.imageUrl ? `${BASE_URL}${recipe.imageUrl}` : "https://placehold.co/600x400?text=No+Image"} alt={recipe.name} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
-      
           <div className="absolute top-6 left-6">
             <Link to="/" className="inline-flex items-center px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-full hover:bg-white transition-all duration-200 shadow-lg">
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,16 +172,13 @@ function RecipeDetailPage() {
             </Link>
           </div>
 
-      
           <div className="absolute top-6 right-6 flex gap-3">
-      
             <button onClick={handleFavoriteClick} disabled={isLoading} className={`p-3 backdrop-blur-sm rounded-full shadow-lg transition-all duration-200 ${isFavorited ? "bg-red-500/90 hover:bg-red-500" : "bg-white/90 hover:bg-white"} ${isLoading ? "opacity-50 cursor-not-allowed" : "hover:scale-110"}`} title={isFavorited ? "Remove from favorites" : "Add to favorites"}>
               <svg className={`w-5 h-5 transition-colors ${isFavorited ? "text-white" : "text-gray-700"}`} fill={isFavorited ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </button>
 
- 
             <button onClick={handleShareClick} className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200" title="Share recipe">
               <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
@@ -193,7 +187,6 @@ function RecipeDetailPage() {
           </div>
         </div>
 
-   
         <div className="absolute bottom-0 left-0 right-0 transform translate-y-1/2">
           <div className="max-w-4xl mx-auto px-6">
             <div className="bg-white rounded-3xl shadow-2xl p-8 backdrop-blur-sm">
@@ -218,7 +211,6 @@ function RecipeDetailPage() {
                 </div>
 
                 <div className="flex flex-col items-end gap-4">
-      
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-2">
                       {[...Array(5)].map((_, i) => (
@@ -245,10 +237,8 @@ function RecipeDetailPage() {
         </div>
       </div>
 
-
       <div className="pt-32 pb-16">
         <div className="max-w-4xl mx-auto px-6">
-
           <div className="mb-12">
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Recipe</h2>
@@ -256,9 +246,7 @@ function RecipeDetailPage() {
             </div>
           </div>
 
-
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
-
             <div className="lg:col-span-2">
               <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
                 <div className="flex items-center gap-3 mb-6">
