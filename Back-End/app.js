@@ -423,7 +423,6 @@ app.get(
     session: false,
   })
 );
-
 app.get("/api/auth/google/callback", passport.authenticate("google", { session: false, failureRedirect: "/login" }), (req, res) => {
   const payload = {
     userId: req.user._id,
