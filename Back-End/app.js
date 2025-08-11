@@ -431,7 +431,8 @@ app.get("/auth/google/callback", passport.authenticate("google", { session: fals
   };
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-  res.redirect(`https://recipe-app-blush-three.vercel.app/auth/google/callback?token=${token}`);
+  // NEW LINE ⬇️
+  res.redirect(`${process.env.FRONTEND_URL}/auth/google/callback?token=${token}`);
 });
 
 //! DataBase
