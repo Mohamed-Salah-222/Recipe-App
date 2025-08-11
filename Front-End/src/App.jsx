@@ -14,6 +14,7 @@ import ResetPasswordPage from "./components/ResetPasswordPage";
 import GoogleAuthCallbackPage from "./components/GoogleAuthCallbackPage";
 import VerifyPage from "./components/VerifyPage";
 
+//*
 function App() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
