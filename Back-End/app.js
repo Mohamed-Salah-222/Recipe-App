@@ -418,44 +418,22 @@ app.delete("/api/recipes/:id", authMiddleware, async (req, res) => {
 
 app.get(
   "/api/auth/google",
-  (req, res, next) => {
-    console.log("=== GOOGLE OAUTH DEBUG ===");
-    console.log("Google OAuth initiated");
-    console.log("CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
-    console.log("CLIENT_SECRET:", process.env.GOOGLE_CLIENT_SECRET ? "SET" : "NOT SET");
-    console.log("CALLBACK_URL:", process.env.GOOGLE_CALLBACK_URL);
-    console.log("Request URL:", req.url);
-    console.log("Request Method:", req.method);
-    console.log("=========================");
-    next();
-  },
   passport.authenticate("google", {
     scope: ["profile", "email"],
     session: false,
   })
 );
+app.get("/auth/google/callback", passport.authenticate("google", { session: false, failureRedirect: "/login" }), (req, res) => {
+  const payload = {
+    userId: req.user._id,
+    email: req.user.email,
+    username: req.user.username,
+  };
+  const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-// Keep your existing callback route as is
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    session: false,
-    failureRedirect: "/login",
-  }),
-  (req, res) => {
-    console.log("=== GOOGLE CALLBACK ===");
-    console.log("User:", req.user);
-    console.log("========================");
-
-    const payload = {
-      userId: req.user._id,
-      email: req.user.email,
-      username: req.user.username,
-    };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
-    res.redirect(`${process.env.FRONTEND_URL}/auth/google/callback?token=${token}`);
-  }
-);
+  // Fixed: Use environment variable instead of hardcoded URL
+  res.redirect(`${process.env.FRONTEND_URL}/auth/google/callback?token=${token}`);
+});
 
 //! DataBase
 mongoose
