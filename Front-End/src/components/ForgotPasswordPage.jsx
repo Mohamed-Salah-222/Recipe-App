@@ -1,4 +1,3 @@
-// src/components/ForgotPasswordPage.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -25,8 +24,6 @@ function ForgotPasswordPage() {
       if (!response.ok) {
         throw new Error(data.message || "Failed to send reset link.");
       }
-
-      // On success, we just show the message from the backend.
       setMessage(data.message);
     } catch (err) {
       setError(err.message);
@@ -37,13 +34,10 @@ function ForgotPasswordPage() {
 
   return (
     <div className="flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 -m-4 md:-m-8 relative overflow-hidden" style={{ minHeight: "calc(100vh - 120px)" }}>
-      {/* Decorative Background Blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
-
-      {/* Main Form Card */}
       <div className="w-full max-w-md bg-white/80 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-8 space-y-6 relative z-10">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">Forgot Your Password?</h1>

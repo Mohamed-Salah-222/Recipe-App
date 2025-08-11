@@ -50,7 +50,7 @@ function ReviewsSection({ recipeId }) {
 
   return (
     <div className="p-8">
-      {/* Header */}
+
       <div className="flex items-center gap-4 mb-8">
         <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
           <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,14 +65,14 @@ function ReviewsSection({ recipeId }) {
         </div>
       </div>
 
-      {/* Add Review Form */}
+
       {user && (
         <div className="mb-8">
           <AddReviewForm recipeId={recipeId} onReviewPosted={handleReviewPosted} />
         </div>
       )}
 
-      {/* Reviews List */}
+
       <div className="space-y-6">
         {reviews.length > 0 ? (
           reviews.map((review) => (
@@ -96,7 +96,7 @@ function ReviewsSection({ recipeId }) {
                   </div>
                 </div>
 
-                {/* Rating */}
+  
                 <div className="flex items-center gap-2">
                   <div className="flex items-center">
                     {[...Array(5)].map((_, i) => (
@@ -109,7 +109,7 @@ function ReviewsSection({ recipeId }) {
                 </div>
               </div>
 
-              {/* Comment */}
+   
               <div className="pl-16">
                 <p className="text-gray-700 leading-relaxed text-lg">{review.comment}</p>
               </div>

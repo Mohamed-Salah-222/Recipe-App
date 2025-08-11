@@ -1,4 +1,4 @@
-// src/components/LoginPage.jsx
+
 import { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -38,15 +38,12 @@ function LoginPage() {
 
   return (
     <div className="flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50 -m-4 md:-m-8 relative overflow-hidden" style={{ minHeight: "calc(100vh - 120px)" }}>
-      {/* Background Blobs */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-emerald-400/20 to-green-400/20 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
-      {/* Login Card */}
       <div className="w-full max-w-md bg-white/90 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-10 space-y-6 relative z-10 transition-shadow hover:shadow-3xl duration-300">
-        {/* Header */}
         <div className="text-center space-y-2">
           <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mx-auto flex items-center justify-center shadow-lg">
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,7 +53,6 @@ function LoginPage() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">Welcome Back!</h1>
         </div>
 
-        {/* Success Message */}
         {successMessage && (
           <div className="p-3 bg-green-50 border border-green-200 rounded-xl">
             <p className="text-sm text-green-700 font-medium flex items-center">
@@ -84,9 +80,9 @@ function LoginPage() {
           </div>
         </div>
 
-        {/* Form */}
+
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email Field */}
+
           <div className="group">
             <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-1">
               Email Address
@@ -97,7 +93,7 @@ function LoginPage() {
             </div>
           </div>
 
-          {/* Password Field */}
+
           <div className="group">
             <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-1">
               Password
@@ -112,8 +108,6 @@ function LoginPage() {
               </Link>
             </div>
           </div>
-
-          {/* Error Message */}
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-xl">
               <p className="text-sm text-red-700 font-medium flex items-center">
@@ -125,7 +119,6 @@ function LoginPage() {
             </div>
           )}
 
-          {/* Submit Button */}
           <button type="submit" disabled={loading} className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
             <span className="flex items-center justify-center">
               {loading ? (
@@ -143,7 +136,6 @@ function LoginPage() {
           </button>
         </form>
 
-        {/* Footer */}
         <p className="text-sm text-center text-gray-600">
           Need an account?{" "}
           <Link to="/register" className="font-semibold text-green-600 hover:text-green-700 transition-colors duration-200 hover:underline">

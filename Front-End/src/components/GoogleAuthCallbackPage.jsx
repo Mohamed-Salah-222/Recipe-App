@@ -1,4 +1,3 @@
-// src/components/GoogleAuthCallbackPage.jsx (Corrected)
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -8,20 +7,15 @@ function GoogleAuthCallbackPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  // This useEffect will now only run ONCE after the component first loads.
   useEffect(() => {
     const token = searchParams.get("token");
 
     if (token) {
       console.log("Token found, logging in and redirecting...");
-      // Use the login function from our global context to save the token
       login(token);
-      // Redirect to the homepage. 'replace: true' prevents the user
-      // from clicking the "back" button and getting stuck here again.
       navigate("/", { replace: true });
     } else {
       console.error("No token found in URL, redirecting to login.");
-      // If for some reason there's no token, send them back to the login page.
       navigate("/login", { replace: true });
     }
   }, []);

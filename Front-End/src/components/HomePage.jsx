@@ -1,31 +1,31 @@
-// frontend/src/components/HomePage.jsx (Final Version with Pagination)
+
 
 import { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 
 function HomePage() {
-  // --- STATE MANAGEMENT ---
+
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // New state for pagination
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // --- DATA FETCHING with PAGINATION ---
+
   useEffect(() => {
-    // Debounce timer to prevent API calls on every keystroke
+
     const delayDebounceFn = setTimeout(() => {
       const fetchRecipes = async () => {
-        // We set loading to true for each new fetch to show feedback
+
         setLoading(true);
         try {
-          // Build the URL with search, page, and limit parameters
+
           const params = new URLSearchParams({
             search: searchTerm,
             page: currentPage,
-            limit: 8, // Show 9 recipes per page
+            limit: 8, 
           });
 
           const apiUrl = `${import.meta.env.VITE_API_URL}/api/recipes?${params.toString()}`;
@@ -35,8 +35,6 @@ function HomePage() {
             throw new Error("Network response was not ok");
           }
           const data = await response.json();
-
-          // Update state with the data from our paginated API response
           setRecipes(data.recipes);
           setTotalPages(data.totalPages);
           setCurrentPage(data.currentPage);
@@ -48,28 +46,27 @@ function HomePage() {
       };
 
       fetchRecipes();
-    }, 300); // 300ms delay
+    }, 300); 
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm, currentPage]); // Re-run when search or currentPage changes
+  }, [searchTerm, currentPage]); 
 
-  // --- EVENT HANDLERS ---
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
-      // Scroll to the top of the recipe list when changing pages
+
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to page 1 whenever the user types a new search
+    setCurrentPage(1); 
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-      {/* Hero Section */}
+
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 left-10 w-72 h-72 bg-emerald-500 rounded-full blur-3xl animate-pulse"></div>
@@ -101,7 +98,6 @@ function HomePage() {
         </div>
       </div>
 
-      {/* Recipe Grid & Pagination */}
       <div className="px-6 pb-16">
         <div className="max-w-7xl mx-auto">
           {loading ? (
@@ -126,7 +122,7 @@ function HomePage() {
                   <RecipeCard key={recipe._id} recipe={recipe} />
                 ))}
               </div>
-              {/* --- PAGINATION CONTROLS --- */}
+
               <div className="flex justify-center items-center mt-12 space-x-2">
                 <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage <= 1} className="px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
                   Previous

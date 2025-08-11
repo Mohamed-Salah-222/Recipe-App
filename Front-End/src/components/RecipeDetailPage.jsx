@@ -11,6 +11,8 @@ function RecipeDetailPage() {
 
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -28,6 +30,72 @@ function RecipeDetailPage() {
     };
     fetchRecipe();
   }, [id]);
+  useEffect(() => {
+    if (user && user.favorites && id) {
+      setIsFavorited(user.favorites.includes(id));
+    }
+  }, [user, id]);
+
+  const handleFavoriteClick = async () => {
+    if (!user || !token) {
+      alert("Please login to add favorites");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const url = `${BASE_URL}/api/favorites/${id}`;
+      const method = isFavorited ? "DELETE" : "POST";
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update favorites");
+      }
+
+      const data = await response.json();
+      setIsFavorited(!isFavorited);
+
+      console.log(data.message);
+    } catch (error) {
+      console.error("Error updating favorites:", error);
+      alert("Failed to update favorites. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleShareClick = async () => {
+    const recipeUrl = `${window.location.origin}/recipes/${id}`;
+    const shareData = {
+      title: recipe?.name || "Amazing Recipe",
+      text: `Check out this amazing recipe: ${recipe?.name || "Recipe"}`,
+      url: recipeUrl,
+    };
+
+    try {
+      if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(recipeUrl);
+        alert("Recipe link copied to clipboard!");
+      }
+    } catch (error) {
+      try {
+        await navigator.clipboard.writeText(recipeUrl);
+        alert("Recipe link copied to clipboard!");
+      } catch (clipboardError) {
+        console.error("Share failed:", error);
+        alert(`Share this recipe: ${recipeUrl}`);
+      }
+    }
+  };
 
   const handleDelete = async () => {
     const isConfirmed = window.confirm("Are you sure you want to delete this recipe?");
@@ -90,14 +158,14 @@ function RecipeDetailPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-      {/* Hero Section */}
+
       <div className="relative">
-        {/* Background Image */}
+    
         <div className="h-96 md:h-[500px] relative overflow-hidden">
           <img src={recipe.imageUrl ? `${BASE_URL}${recipe.imageUrl}` : "https://placehold.co/600x400?text=No+Image"} alt={recipe.name} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
-          {/* Back Button */}
+      
           <div className="absolute top-6 left-6">
             <Link to="/" className="inline-flex items-center px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-full hover:bg-white transition-all duration-200 shadow-lg">
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,14 +175,17 @@ function RecipeDetailPage() {
             </Link>
           </div>
 
-          {/* Action Buttons */}
+      
           <div className="absolute top-6 right-6 flex gap-3">
-            <button className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-200">
-              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      
+            <button onClick={handleFavoriteClick} disabled={isLoading} className={`p-3 backdrop-blur-sm rounded-full shadow-lg transition-all duration-200 ${isFavorited ? "bg-red-500/90 hover:bg-red-500" : "bg-white/90 hover:bg-white"} ${isLoading ? "opacity-50 cursor-not-allowed" : "hover:scale-110"}`} title={isFavorited ? "Remove from favorites" : "Add to favorites"}>
+              <svg className={`w-5 h-5 transition-colors ${isFavorited ? "text-white" : "text-gray-700"}`} fill={isFavorited ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </button>
-            <button className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-200">
+
+ 
+            <button onClick={handleShareClick} className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200" title="Share recipe">
               <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
               </svg>
@@ -122,7 +193,7 @@ function RecipeDetailPage() {
           </div>
         </div>
 
-        {/* Recipe Header Card */}
+   
         <div className="absolute bottom-0 left-0 right-0 transform translate-y-1/2">
           <div className="max-w-4xl mx-auto px-6">
             <div className="bg-white rounded-3xl shadow-2xl p-8 backdrop-blur-sm">
@@ -147,7 +218,7 @@ function RecipeDetailPage() {
                 </div>
 
                 <div className="flex flex-col items-end gap-4">
-                  {/* Rating */}
+      
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-2">
                       {[...Array(5)].map((_, i) => (
@@ -159,7 +230,6 @@ function RecipeDetailPage() {
                     <p className="text-sm text-gray-500">{recipe.numReviews || 0} reviews</p>
                   </div>
 
-                  {/* Cooking Time */}
                   <div className="bg-emerald-50 px-4 py-2 rounded-full">
                     <div className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,10 +245,10 @@ function RecipeDetailPage() {
         </div>
       </div>
 
-      {/* Content Section */}
+
       <div className="pt-32 pb-16">
         <div className="max-w-4xl mx-auto px-6">
-          {/* Description */}
+
           <div className="mb-12">
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Recipe</h2>
@@ -186,9 +256,9 @@ function RecipeDetailPage() {
             </div>
           </div>
 
-          {/* Ingredients and Instructions */}
+
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
-            {/* Ingredients */}
+
             <div className="lg:col-span-2">
               <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
                 <div className="flex items-center gap-3 mb-6">
@@ -210,7 +280,6 @@ function RecipeDetailPage() {
               </div>
             </div>
 
-            {/* Instructions */}
             <div className="lg:col-span-3">
               <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
                 <div className="flex items-center gap-3 mb-6">
@@ -235,7 +304,6 @@ function RecipeDetailPage() {
             </div>
           </div>
 
-          {/* Author Actions */}
           {isAuthor && (
             <div className="mb-12">
               <div className="bg-white rounded-2xl p-8 shadow-lg">
@@ -263,7 +331,6 @@ function RecipeDetailPage() {
             </div>
           )}
 
-          {/* Reviews Section */}
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
             <ReviewsSection recipeId={id} />
           </div>

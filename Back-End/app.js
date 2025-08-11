@@ -283,6 +283,22 @@ app.post("/api/recipes/:id/reviews", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Server error while creating review." });
   }
 });
+app.post("/api/favorites/:recipeId", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.userId; 
+    const { recipeId } = req.params;
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { favorites: recipeId } },
+      { new: true }
+    );
+
+    res.json({ message: "Recipe added to favorites", favorites: user.favorites });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 //^-----------------------------------------------------------------------------------GET REQUESTS-----------------------------------------------------------------------------------
 //& ALL Recipes API >> Updated with the search
 app.get("/api/recipes", async (req, res) => {
@@ -360,6 +376,18 @@ app.get("/api/users/:username/recipes", async (req, res) => {
     res.status(500).json({ message: "Server error while fetching recipes." });
   }
 });
+app.get("/api/favorites", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const user = await User.findById(userId);
+    const recipes = await Recipe.find({ _id: { $in: user.favorites } });
+
+    res.json(recipes);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 //^-----------------------------------------------------------------------------------PUT REQUESTS-----------------------------------------------------------------------------------
 //& Update a recipe
 app.put("/api/recipes/:id", authMiddleware, async (req, res) => {
@@ -413,6 +441,19 @@ app.delete("/api/recipes/:id", authMiddleware, async (req, res) => {
   } catch (error) {
     console.error("Error deleting recipe:", error);
     res.status(500).json({ message: "Server error while deleting recipe." });
+  }
+});
+
+app.delete("/api/favorites/:recipeId", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { recipeId } = req.params;
+
+    const user = await User.findByIdAndUpdate(userId, { $pull: { favorites: recipeId } }, { new: true });
+
+    res.json({ message: "Recipe removed from favorites", favorites: user.favorites });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
