@@ -44,7 +44,7 @@ function RecipeDetailPage() {
 
     setIsLoading(true);
     try {
-      const url = `${import.meta.env.VITE_API_URL}/api/favorites/${id}`; // ✅ Changed from BASE_URL
+      const url = `${import.meta.env.VITE_API_URL}/api/favorites/${id}`;
       const method = isFavorited ? "DELETE" : "POST";
 
       const response = await fetch(url, {
@@ -160,7 +160,7 @@ function RecipeDetailPage() {
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
       <div className="relative">
         <div className="h-96 md:h-[500px] relative overflow-hidden">
-          <img src={recipe.imageUrl ? `${BASE_URL}${recipe.imageUrl}` : "https://placehold.co/600x400?text=No+Image"} alt={recipe.name} className="w-full h-full object-cover" />
+          <img src={recipe.imageUrl ? `${import.meta.env.VITE_API_URL}${recipe.imageUrl}` : "https://placehold.co/600x400?text=No+Image"} alt={recipe.name} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
           <div className="absolute top-6 left-6">
